@@ -1,0 +1,690 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-dark: #0a0a1a;
+  --bg-deep: #14142b;
+  --pink: #ff4d8d;
+  --pink-light: #ff9ec4;
+  --gold: #f9c74f;
+  --purple: #7b2cbf;
+  --text: #f5f5f7;
+  --text-soft: #b8b8cc;
+}
+
+html, body {
+  scroll-behavior: smooth;
+}
+
+/* 🔧 FIX SCROLL - control de overflow */
+body.intro-active {
+  overflow: hidden;
+}
+
+body.intro-done {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #0a0a1a 0%, #14142b 50%, #1a0a2e 100%);
+  color: var(--text);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ============ CANVAS ESTRELLAS ============ */
+#stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ============ CORAZONES ============ */
+.hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.heart {
+  position: absolute;
+  bottom: -50px;
+  font-size: 20px;
+  opacity: 0.7;
+  animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ============ INTRO ============ */
+.intro {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at center, #1a0a2e 0%, #0a0a1a 100%);
+  z-index: 100;
+  transition: opacity 1s ease, transform 1s ease;
+  padding: 20px;
+}
+
+/* 🔧 Cuando se oculta, se quita totalmente del layout */
+.intro.hidden {
+  opacity: 0;
+  transform: scale(1.1);
+  pointer-events: none;
+  visibility: hidden;
+  display: none;
+}
+
+.intro-content {
+  text-align: center;
+  max-width: 600px;
+  animation: fadeInUp 1.2s ease;
+}
+
+.intro-sub {
+  color: var(--pink-light);
+  font-size: 0.95rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.intro-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  background: linear-gradient(135deg, #ff4d8d, #f9c74f, #ff9ec4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 20px;
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { filter: drop-shadow(0 0 10px rgba(255, 77, 141, 0.5)); }
+  to { filter: drop-shadow(0 0 25px rgba(255, 77, 141, 0.9)); }
+}
+
+.intro-text {
+  color: var(--text-soft);
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+}
+
+/* ============ BOTONES ============ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 38px;
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 30px rgba(255, 77, 141, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(255, 77, 141, 0.6);
+}
+
+/* ============ MAIN ============ */
+.main {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease 0.3s;
+}
+
+.main.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 20px 60px;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 800px;
+  animation: fadeInUp 1.2s ease;
+}
+
+.hero-tag {
+  display: inline-block;
+  padding: 8px 20px;
+  background: rgba(255, 77, 141, 0.15);
+  border: 1px solid rgba(255, 77, 141, 0.4);
+  border-radius: 50px;
+  color: var(--pink-light);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+}
+
+.hero-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(3rem, 9vw, 6rem);
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.hero-title span {
+  background: linear-gradient(135deg, #ff4d8d, #f9c74f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  color: var(--gold);
+  font-size: 1.05rem;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.hero-message {
+  color: var(--text-soft);
+  font-size: 1.15rem;
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ============ SECCIONES ============ */
+section {
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  text-align: center;
+  margin-bottom: 50px;
+  background: linear-gradient(135deg, #ff4d8d, #f9c74f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============ COUNTDOWN ============ */
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.count-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 77, 141, 0.25);
+  border-radius: 20px;
+  padding: 25px 10px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.count-box:hover {
+  transform: translateY(-5px);
+  border-color: var(--pink);
+  box-shadow: 0 10px 40px rgba(255, 77, 141, 0.3);
+}
+
+.count-num {
+  display: block;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #ff4d8d, #f9c74f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 5px;
+}
+
+.count-label {
+  color: var(--text-soft);
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ============ CARDS ============ */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-bottom: 50px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 35px 25px;
+  text-align: center;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 77, 141, 0.5);
+  box-shadow: 0 20px 60px rgba(255, 77, 141, 0.25);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 18px;
+  display: inline-block;
+  animation: bounce 3s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.card h3 {
+  color: var(--pink-light);
+  font-size: 1.25rem;
+  margin-bottom: 12px;
+}
+
+.card p {
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.card p + p {
+  margin-top: 6px;
+}
+
+/* ============ AIRBNB SHOWCASE ============ */
+.airbnb-section {
+  padding: 80px 20px;
+}
+
+.gallery-sub {
+  text-align: center;
+  color: var(--text-soft);
+  margin-top: -35px;
+  margin-bottom: 50px;
+  font-size: 1.05rem;
+}
+
+.airbnb-showcase {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 40px;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.airbnb-widget-wrapper {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 77, 141, 0.1), rgba(123, 44, 191, 0.1));
+  border: 2px solid rgba(255, 77, 141, 0.3);
+  border-radius: 24px;
+  padding: 15px;
+  min-height: 480px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.airbnb-widget-wrapper:hover {
+  border-color: var(--pink);
+  box-shadow: 0 25px 80px rgba(255, 77, 141, 0.35);
+  transform: translateY(-5px);
+}
+
+.airbnb-widget-wrapper .airbnb-embed-frame {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  background: white !important;
+  width: 100% !important;
+  height: 480px !important;
+}
+
+.airbnb-widget-wrapper iframe {
+  border-radius: 16px !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Info lateral */
+.airbnb-info {
+  padding: 20px;
+}
+
+.airbnb-info h3 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.2rem;
+  color: var(--pink-light);
+  margin-bottom: 25px;
+  line-height: 1.2;
+}
+
+.feature-list {
+  list-style: none;
+  margin-bottom: 30px;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  color: var(--text-soft);
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.feature-list li:hover {
+  color: var(--text);
+  padding-left: 8px;
+}
+
+.feature-list li:last-child {
+  border-bottom: none;
+}
+
+.feature-list li span {
+  font-size: 1.3rem;
+  min-width: 30px;
+  text-align: center;
+}
+
+.btn-airbnb {
+  display: inline-block;
+  padding: 16px 36px;
+  background: linear-gradient(135deg, #ff385c, #e61e4d);
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 30px rgba(255, 56, 92, 0.4);
+  text-align: center;
+}
+
+.btn-airbnb:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 14px 45px rgba(255, 56, 92, 0.6);
+}
+
+/* ============ CARTA ============ */
+.letter {
+  padding: 100px 20px;
+}
+
+.letter-content {
+  max-width: 700px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, rgba(255, 77, 141, 0.08), rgba(123, 44, 191, 0.08));
+  border: 1px solid rgba(255, 77, 141, 0.25);
+  border-radius: 30px;
+  padding: 60px 40px;
+  text-align: center;
+  backdrop-filter: blur(15px);
+  position: relative;
+  overflow: hidden;
+}
+
+.letter-content::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 77, 141, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+.letter-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--pink-light);
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.letter-text {
+  color: var(--text-soft);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.letter-signature {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.6rem;
+  color: var(--gold);
+  margin: 30px 0;
+  position: relative;
+}
+
+.letter-signature span {
+  font-size: 1.9rem;
+}
+
+.btn-final {
+  position: relative;
+  margin-top: 20px;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ============ MODAL ============ */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+  padding: 20px;
+}
+
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #1a0a2e, #2a0a3e);
+  border: 1px solid var(--pink);
+  border-radius: 30px;
+  padding: 50px 40px;
+  text-align: center;
+  max-width: 450px;
+  transform: scale(0.8);
+  transition: transform 0.4s ease;
+  box-shadow: 0 30px 80px rgba(255, 77, 141, 0.4);
+}
+
+.modal.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-emoji {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  animation: pulse 1.5s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.modal-content h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.5rem;
+  color: var(--pink-light);
+  margin-bottom: 15px;
+}
+
+.modal-content p {
+  color: var(--text-soft);
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* ============ ANIMACIONES ============ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .airbnb-showcase {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .airbnb-widget-wrapper {
+    min-height: 420px;
+  }
+
+  .airbnb-widget-wrapper .airbnb-embed-frame {
+    height: 420px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .countdown {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .letter-content {
+    padding: 40px 25px;
+  }
+
+  .hero {
+    padding: 80px 15px 40px;
+  }
+
+  section {
+    padding: 60px 15px;
+  }
+
+  .airbnb-widget-wrapper {
+    min-height: 380px;
+    padding: 10px;
+  }
+
+  .airbnb-widget-wrapper .airbnb-embed-frame {
+    height: 380px !important;
+  }
+
+  .airbnb-info h3 {
+    font-size: 1.8rem;
+  }
+
+  .btn-airbnb {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 0.95rem;
+  }
+}

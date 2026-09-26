@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Una sorpresa para ti 💖</title>
+  <meta name="description" content="Una sorpresa muy especial... nos vamos a Xela 💕">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="intro-active">
+
+  <!-- Canvas de estrellas -->
+  <canvas id="stars"></canvas>
+
+  <!-- Corazones flotantes -->
+  <div class="hearts" id="hearts"></div>
+
+  <!-- PANTALLA DE BIENVENIDA -->
+  <section class="intro" id="intro">
+    <div class="intro-content">
+      <p class="intro-sub">Para la mujer más especial del mundo</p>
+      <h1 class="intro-title">Hola, mi amor</h1>
+      <p class="intro-text">Tengo algo que quiero decirle...</p>
+      <button class="btn-primary" id="openBtn">
+        <span>Abrir sorpresa</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="main" id="main">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-content">
+        <p class="hero-tag">🎁 Sorpresa desbloqueada</p>
+        <h1 class="hero-title">Nos vamos a <span>Xela</span></h1>
+        <p class="hero-subtitle">Quetzaltenango, Guatemala · 12 y 13 de Diciembre 2026</p>
+        <p class="hero-message">
+          Quería regalarte algo más que un viaje… quería regalarte un momento,
+          un recuerdo, una escapada juntos. Prepárese porque nos vamos used y la nena y yo. 💫
+        </p>
+      </div>
+    </header>
+
+    <!-- CUENTA REGRESIVA -->
+    <section class="countdown-section">
+      <h2 class="section-title">Cuenta regresiva para nuestra aventura</h2>
+      <div class="countdown" id="countdown">
+        <div class="count-box">
+          <span class="count-num" id="days">00</span>
+          <span class="count-label">Días</span>
+        </div>
+        <div class="count-box">
+          <span class="count-num" id="hours">00</span>
+          <span class="count-label">Horas</span>
+        </div>
+        <div class="count-box">
+          <span class="count-num" id="minutes">00</span>
+          <span class="count-label">Minutos</span>
+        </div>
+        <div class="count-box">
+          <span class="count-num" id="seconds">00</span>
+          <span class="count-label">Segundos</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- DETALLES DEL VIAJE -->
+    <section class="details">
+      <h2 class="section-title">Los detalles de nuestro viaje</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🏡</div>
+          <h3>Alojamiento</h3>
+          <p>Condominio acogedor en Quetzaltenango con todas las comodidades.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <h3>Fechas</h3>
+          <p><strong>Entrada:</strong> Sábado 12 de diciembre 2026</p>
+          <p><strong>Salida:</strong> Domingo 13 de diciembre 2026</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">👫</div>
+          <h3>Invitados</h3>
+          <p>Solo tú y yo… (y si quieres, los peques también 😄)</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📍</div>
+          <h3>Ubicación</h3>
+          <p>Quetzaltenango (Xela), la ciudad de las estrellas. 🌋</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN DEL ALOJAMIENTO CON WIDGET AIRBNB -->
+    <section class="airbnb-section">
+      <h2 class="section-title">Nuestro rinconcito en Xela</h2>
+      <p class="gallery-sub">Este es el lugar exacto donde nos vamos a quedar 🏡💕</p>
+
+      <div class="airbnb-showcase">
+        <!-- Widget oficial de Airbnb -->
+        <div class="airbnb-widget-wrapper">
+          <div class="airbnb-embed-frame"
+               data-id="1571409888574105917"
+               data-view="home"
+               data-hide-price="false"
+               style="width:100%;height:100%;margin:0;">
+            <a href="https://www.airbnb.com.gt/rooms/1571409888574105917?check_in=2026-12-12&check_out=2026-12-13&guests=1&adults=2&children=1&s=66&source=embed_widget">
+              Ver en Airbnb
+            </a>
+            <a href="https://www.airbnb.com.gt/rooms/1571409888574105917?check_in=2026-12-12&check_out=2026-12-13&guests=1&adults=2&children=1&s=66&source=embed_widget" rel="nofollow">
+              Condominio · Quetzaltenango
+            </a>
+            <script async src="https://www.airbnb.com.gt/embeddable/airbnb_jssdk"></script>
+          </div>
+        </div>
+
+        <!-- Info lateral del alojamiento -->
+        <div class="airbnb-info">
+          <h3>Lo que nos espera ✨</h3>
+          <ul class="feature-list">
+            <li><span>🛏️</span> 2 habitaciones espaciosas</li>
+            <li><span>🛁</span> 2 baños completos</li>
+            <li><span>🏙️</span> Ubicado en Quetzaltenango</li>
+            <li><span>🏡</span> Condominio privado y seguro</li>
+            <li><span>💕</span> Perfecto para nuestra escapada</li>
+            <li><span>🌋</span> Cerca de todo lo bonito de Xela</li>
+          </ul>
+
+          <a href="https://www.airbnb.com.gt/rooms/1571409888574105917?check_in=2026-12-12&check_out=2026-12-13&guests=1&adults=2&children=1"
+             target="_blank"
+             rel="noopener"
+             class="btn-airbnb">
+            🏠 Ver el alojamiento completo
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTA FINAL -->
+    <section class="letter">
+      <div class="letter-content">
+        <h2 class="letter-title">Una carta para Usted</h2>
+        <p class="letter-text">
+          Mi amor, quería que este viaje no  solo sea una reserva más, sino un recuerdo
+          que empiece desde hoy, desde el momento en que vea esta página.
+        </p>
+        <p class="letter-text">
+          Gracias por caminar conmigo, por cada día, por cada risa y por cada momento
+          compartido. Xela nos espera y yo no puedo esperar para vivirla con ustedes.
+        </p>
+        <p class="letter-signature">Con todo mi amor,<br><span>Su futuro Esposo 💖</span></p>
+
+        <button class="btn-primary btn-final" id="finalBtn">
+          Te amo 💕
+        </button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Hecho con ❤️ solo para usted · Diciembre 2026</p>
+    </footer>
+
+  </main>
+
+  <!-- Modal final -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <div class="modal-emoji">💖</div>
+      <h2>¡Te amo!</h2>
+      <p>Nos vemos en Xela mi amor… ¡prepárase que viene lo mejor!</p>
+      <button class="btn-primary" id="closeModal">Cerrar</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
